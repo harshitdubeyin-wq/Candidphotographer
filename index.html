@@ -3,1004 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candidphotographers — Premium Photography</title>
+<title>Candidphotographers — Premium Photography Bhopal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --black: #0a0a0a;
-    --deep: #111111;
-    --card: #161616;
-    --border: rgba(255,255,255,0.07);
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim: rgba(201,168,76,0.15);
-    --white: #f5f2ee;
-    --muted: rgba(245,242,238,0.45);
-    --text: rgba(245,242,238,0.85);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(2px);
-  }
-
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    color: var(--white);
-  }
-  .logo span { color: var(--gold); }
-
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a {
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 10px 28px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-  .nav-cta:hover { background: var(--gold); color: var(--black); }
-
-  /* HERO */
-  .hero {
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 80% 30%, rgba(201,168,76,0.04) 0%, transparent 60%),
-      linear-gradient(135deg, #0a0a0a 0%, #131313 50%, #0d0d0d 100%);
-  }
-
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
-  }
-
-  .hero-content {
-    position: relative;
-    text-align: center;
-    z-index: 2;
-    animation: heroFadeIn 1.4s ease forwards;
-  }
-
-  @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(4rem, 9vw, 8.5rem);
-    font-weight: 300;
-    line-height: 0.92;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.5s forwards;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero-sub {
-    font-size: 0.9rem;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    max-width: 460px;
-    margin: 0 auto 52px;
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.7s forwards;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.9s forwards;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .btn-primary {
-    background: var(--gold);
-    color: var(--black);
-    padding: 16px 44px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border: none;
-    cursor: none;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 20px 40px rgba(201,168,76,0.2); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    padding: 16px 44px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border: 1px solid var(--border);
-    cursor: none;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: var(--muted);
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 1s ease 1.2s forwards;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s ease infinite;
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(0.6); }
-  }
-
-  /* SECTION BASE */
-  section { padding: 120px 60px; }
-
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
-
-  .section-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.9;
-    max-width: 500px;
-  }
-
-  /* SERVICES */
-  .services { background: var(--deep); }
-
-  .services-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: end;
-    margin-bottom: 80px;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-
-  .service-card {
-    background: var(--card);
-    padding: 48px 40px;
-    border-top: 1px solid var(--border);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-  }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover { background: #1a1a1a; }
-
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--gold-dim);
-    margin-bottom: 24px;
-    line-height: 1;
-  }
-
-  .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  .service-desc {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  /* PORTFOLIO STRIP */
-  .portfolio-strip {
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    gap: 3px;
-    height: 340px;
-  }
-
-  .portfolio-item {
-    flex: 1;
-    background: var(--card);
-    position: relative;
-    overflow: hidden;
-    transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: none;
-  }
-  .portfolio-item:hover { flex: 2.5; }
-
-  .portfolio-bg {
-    position: absolute;
-    inset: 0;
-    transition: transform 0.6s ease;
-  }
-  .portfolio-item:hover .portfolio-bg { transform: scale(1.05); }
-
-  .p1 .portfolio-bg { background: linear-gradient(135deg, #1a1510 0%, #2d2418 50%, #1a1510 100%); }
-  .p2 .portfolio-bg { background: linear-gradient(135deg, #0f1520 0%, #1a2535 50%, #0f1520 100%); }
-  .p3 .portfolio-bg { background: linear-gradient(135deg, #1a1018 0%, #2d1a28 50%, #1a1018 100%); }
-  .p4 .portfolio-bg { background: linear-gradient(135deg, #101a10 0%, #1a2d1a 50%, #101a10 100%); }
-  .p5 .portfolio-bg { background: linear-gradient(135deg, #1a1510 0%, #2d2418 50%, #1a1510 100%); }
-
-  /* Decorative overlay pattern for portfolio items */
-  .portfolio-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
-  }
-
-  .p1 .portfolio-bg::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(201,168,76,0.15)' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='rgba(201,168,76,0.08)' stroke-width='1'/%3E%3C/svg%3E") center/60% no-repeat; }
-
-  .portfolio-label {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 24px 28px;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-    transform: translateY(10px);
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  .portfolio-item:hover .portfolio-label { opacity: 1; transform: translateY(0); }
-
-  .portfolio-label h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .portfolio-label p {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* PROCESS */
-  .process { background: var(--black); }
-
-  .process-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 100px;
-    align-items: start;
-  }
-
-  .process-steps { margin-top: 60px; }
-
-  .step {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 28px;
-    padding: 36px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-    transition: all 0.3s ease;
-  }
-  .step:hover .step-num { color: var(--gold); }
-
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color: rgba(201,168,76,0.3);
-    line-height: 1;
-    transition: color 0.3s ease;
-  }
-
-  .step-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 10px;
-  }
-  .step-desc {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  /* BOOKING SECTION */
-  .booking {
-    background: var(--deep);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .booking::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .booking-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 100px;
-    align-items: start;
-    position: relative;
-    z-index: 1;
-  }
-
-  .booking-info { position: sticky; top: 120px; }
-
-  .booking-features {
-    margin-top: 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .feature {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.83rem;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-  }
-
-  .feature-dot {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* FORM */
-  .form-card {
-    background: var(--card);
-    padding: 56px 52px;
-    border: 1px solid var(--border);
-    position: relative;
-  }
-
-  .form-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .form-sub {
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-bottom: 44px;
-    line-height: 1.7;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group.full { grid-column: 1 / -1; }
-
-  .form-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .form-input, .form-select, .form-textarea {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    color: var(--white);
-    padding: 14px 18px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    transition: all 0.3s ease;
-    outline: none;
-    width: 100%;
-    cursor: none;
-  }
-  .form-input::placeholder, .form-textarea::placeholder { color: rgba(245,242,238,0.25); }
-  .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.05);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
-  }
-
-  .form-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23c9a84c' stroke-width='1.5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 18px center;
-    cursor: none;
-  }
-  .form-select option { background: var(--card); color: var(--white); }
-
-  .form-textarea { resize: vertical; min-height: 120px; }
-
-  .form-submit {
-    grid-column: 1 / -1;
-    margin-top: 12px;
-    background: var(--gold);
-    color: var(--black);
-    border: none;
-    padding: 18px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s ease;
-    width: 100%;
-  }
-  .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201,168,76,0.25); }
-
-  /* SUCCESS */
-  .success-msg {
-    display: none;
-    text-align: center;
-    padding: 40px 20px;
-  }
-  .success-msg.show { display: block; animation: fadeUp 0.6s ease forwards; }
-  .success-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  .success-msg h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .success-msg p {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  /* STATS */
-  .stats {
-    padding: 80px 60px;
-    background: var(--black);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stat {
-    text-align: center;
-    padding: 40px;
-    border-right: 1px solid var(--border);
-  }
-  .stat:last-child { border-right: none; }
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .stat-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* TESTIMONIALS */
-  .testimonials { background: var(--deep); }
-
-  .testimonials-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-
-  .testimonial {
-    background: var(--card);
-    padding: 44px 40px;
-    position: relative;
-  }
-
-  .quote-mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem;
-    font-weight: 300;
-    color: var(--gold-dim);
-    line-height: 0.6;
-    margin-bottom: 24px;
-  }
-
-  .testimonial-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.8;
-    margin-bottom: 32px;
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .author-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--gold-dim);
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-
-  .author-name {
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .author-type {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--black);
-    padding: 80px 60px 40px;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 60px;
-  }
-
-  .footer-brand .logo { font-size: 1.4rem; margin-bottom: 20px; display: block; }
-  .footer-brand p {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.9;
-    max-width: 280px;
-  }
-
-  .footer-col h4 {
-    font-size: 0.68rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-  }
-
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-links a {
-    font-size: 0.82rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    letter-spacing: 0.02em;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-bottom p {
-    font-size: 0.75rem;
-    color: rgba(245,242,238,0.3);
-    letter-spacing: 0.05em;
-  }
-
-  .social-links { display: flex; gap: 24px; }
-  .social-links a {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .social-links a:hover { color: var(--gold); }
-
-  /* MODAL */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    backdrop-filter: blur(8px);
-    padding: 20px;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-
-  .modal {
-    background: var(--card);
-    border: 1px solid var(--border);
-    max-width: 520px;
-    width: 100%;
-    padding: 52px;
-    position: relative;
-    transform: translateY(30px);
-    transition: transform 0.4s ease;
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-
-  .modal::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 20px; right: 24px;
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 1.4rem;
-    cursor: none;
-    transition: color 0.3s ease;
-    line-height: 1;
-  }
-  .modal-close:hover { color: var(--gold); }
-
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .modal-sub {
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-bottom: 36px;
-    line-height: 1.7;
-  }
-
-  .login-form { display: flex; flex-direction: column; gap: 18px; }
-
-  .login-switch {
-    text-align: center;
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-top: 8px;
-  }
-  .login-switch a {
-    color: var(--gold);
-    text-decoration: none;
-    cursor: none;
-  }
-  .login-switch a:hover { text-decoration: underline; }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 4px 0;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    color: rgba(245,242,238,0.2);
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ANIMATED BACKGROUND ELEMENTS */
-  .floating-shapes {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .shape {
-    position: absolute;
-    border: 1px solid rgba(201,168,76,0.06);
-    animation: floatShape 20s ease-in-out infinite;
-  }
-  .shape-1 { width: 300px; height: 300px; top: 10%; right: 5%; transform: rotate(45deg); animation-delay: 0s; }
-  .shape-2 { width: 180px; height: 180px; top: 60%; left: 3%; transform: rotate(20deg); animation-delay: -7s; }
-  .shape-3 { width: 80px; height: 80px; top: 40%; right: 20%; animation-delay: -14s; }
-
-  @keyframes floatShape {
-    0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
-    50% { transform: rotate(45deg) translateY(-20px); opacity: 1; }
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 1024px) {
-    nav { padding: 24px 32px; }
-    section { padding: 80px 32px; }
-    .services-header { grid-template-columns: 1fr; gap: 32px; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .process-grid { grid-template-columns: 1fr; gap: 40px; }
-    .booking-inner { grid-template-columns: 1fr; gap: 48px; }
-    .booking-info { position: static; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    .nav-links { display: none; }
-    section { padding: 60px 24px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-group.full { grid-column: 1; }
-    .form-submit { grid-column: 1; }
-    .stats { padding: 60px 24px; }
-    .portfolio-strip { height: 200px; }
-    .footer-top { grid-template-columns: 1fr; gap: 36px; }
-    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-    .modal { padding: 36px 28px; }
-    .form-card { padding: 36px 28px; }
-  }
-
-  /* SCROLL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0a0a0a;--deep:#111111;--card:#161616;
+  --border:rgba(255,255,255,0.07);--gold:#c9a84c;
+  --gold-light:#e8c97a;--gold-dim:rgba(201,168,76,0.15);
+  --white:#f5f2ee;--muted:rgba(245,242,238,0.45);--text:rgba(245,242,238,0.85)
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(201,168,76,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,10,10,0.95),transparent);backdrop-filter:blur(2px);transition:all .3s ease}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.1em;color:var(--white);text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s ease}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 28px;font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;cursor:none;transition:all .3s ease;text-decoration:none}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+.hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.75) 100%);z-index:1}
+.hero-grid{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 30%,transparent 100%)}
+.hero-content{position:relative;text-align:center;z-index:3;animation:heroFadeIn 1.4s ease forwards}
+@keyframes heroFadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp 1s ease .3s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,9vw,8.5rem);font-weight:300;line-height:.92;color:var(--white);margin-bottom:32px;opacity:0;animation:fadeUp 1s ease .5s forwards;text-shadow:0 4px 30px rgba(0,0,0,0.5)}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:.9rem;letter-spacing:.06em;color:rgba(245,242,238,0.85);max-width:460px;margin:0 auto 52px;line-height:1.8;opacity:0;animation:fadeUp 1s ease .7s forwards}
+.hero-actions{display:flex;gap:20px;justify-content:center;opacity:0;animation:fadeUp 1s ease .9s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;z-index:3;opacity:0;animation:fadeUp 1s ease 1.2s forwards}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* BUTTONS */
+.btn-primary{background:var(--gold);color:var(--black);padding:16px 44px;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:none;text-decoration:none;transition:all .3s ease;display:inline-block}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 20px 40px rgba(201,168,76,0.2)}
+.btn-outline{background:transparent;color:var(--white);padding:16px 44px;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.4);cursor:none;text-decoration:none;transition:all .3s ease;display:inline-block}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* SECTION */
+section{padding:120px 60px}
+.section-label{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;line-height:1.1;color:var(--white);margin-bottom:24px}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-desc{font-size:.9rem;color:var(--muted);line-height:1.9;max-width:500px}
+
+/* STATS */
+.stats{padding:80px 60px;background:var(--black);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{text-align:center;padding:40px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:12px}
+.stat-label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* SERVICES */
+.services{background:var(--deep)}
+.services-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.service-card{background:var(--card);padding:48px 40px;border-top:1px solid var(--border);transition:all .4s ease;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s ease}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{background:#1a1a1a}
+.service-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--gold-dim);margin-bottom:24px;line-height:1}
+.service-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--white);margin-bottom:16px}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.8}
+
+/* PORTFOLIO GALLERY */
+.portfolio-section{background:var(--black);padding:120px 60px}
+.portfolio-header{margin-bottom:60px}
+.portfolio-masonry{columns:3;column-gap:4px}
+.portfolio-masonry .p-item{break-inside:avoid;margin-bottom:4px;overflow:hidden;position:relative;cursor:none}
+.portfolio-masonry .p-item img{width:100%;display:block;transition:transform .6s ease}
+.portfolio-masonry .p-item:hover img{transform:scale(1.04)}
+.portfolio-masonry .p-item .p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%);opacity:0;transition:opacity .4s ease;display:flex;align-items:flex-end;padding:20px}
+.portfolio-masonry .p-item:hover .p-overlay{opacity:1}
+.p-overlay-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);letter-spacing:.08em}
+
+/* FEATURED PHOTO — full bleed */
+.featured-photo{height:70vh;position:relative;overflow:hidden}
+.featured-photo img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 8s ease}
+.featured-photo:hover img{transform:scale(1.04)}
+.featured-caption{position:absolute;bottom:0;left:0;right:0;padding:60px;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%)}
+.featured-caption h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--white);margin-bottom:8px}
+.featured-caption p{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* TWO-PHOTO ROW */
+.photo-row{display:grid;grid-template-columns:1fr 1fr;gap:4px;height:60vh}
+.photo-row .pr-item{overflow:hidden;position:relative}
+.photo-row .pr-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.photo-row .pr-item:hover img{transform:scale(1.05)}
+.photo-row .pr-label{position:absolute;bottom:20px;left:24px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--gold);opacity:0;transition:opacity .4s ease}
+.photo-row .pr-item:hover .pr-label{opacity:1}
+
+/* PROCESS */
+.process{background:var(--deep)}
+.process-grid{display:grid;grid-template-columns:1fr 2fr;gap:100px;align-items:start}
+.process-steps{margin-top:60px}
+.step{display:grid;grid-template-columns:60px 1fr;gap:28px;padding:36px 0;border-bottom:1px solid var(--border);align-items:start;transition:all .3s ease}
+.step:hover .step-num{color:var(--gold)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:rgba(201,168,76,0.3);line-height:1;transition:color .3s ease}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--white);margin-bottom:10px}
+.step-desc{font-size:.82rem;color:var(--muted);line-height:1.8}
+
+/* BOOKING */
+.booking{background:var(--black);position:relative;overflow:hidden}
+.booking::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 70%);pointer-events:none}
+.booking-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:start;position:relative;z-index:1}
+.booking-info{position:sticky;top:120px}
+.booking-features{margin-top:48px;display:flex;flex-direction:column;gap:24px}
+.feature{display:flex;align-items:center;gap:16px;font-size:.83rem;color:var(--muted)}
+.feature-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* FORM */
+.form-card{background:var(--card);padding:56px 52px;border:1px solid var(--border);position:relative}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--white);margin-bottom:8px}
+.form-sub{font-size:.82rem;color:var(--muted);margin-bottom:44px;line-height:1.7}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--white);padding:14px 18px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:300;transition:all .3s ease;outline:none;width:100%;cursor:none}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(245,242,238,0.25)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.05);box-shadow:0 0 0 3px rgba(201,168,76,0.08)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23c9a84c' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;background-color:rgba(255,255,255,0.04)}
+.form-select option{background:var(--card);color:var(--white)}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{grid-column:1/-1;margin-top:12px;background:var(--gold);color:var(--black);border:none;padding:18px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;cursor:none;transition:all .3s ease;width:100%}
+.form-submit:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,168,76,0.25)}
+.form-submit:disabled{opacity:.6;transform:none}
+.success-msg{display:none;text-align:center;padding:40px 20px}
+.success-msg.show{display:block;animation:fadeUp .6s ease forwards}
+.success-icon{font-size:3rem;margin-bottom:20px}
+.success-msg h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--gold);margin-bottom:12px}
+.success-msg p{font-size:.88rem;color:var(--muted);line-height:1.8}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--deep)}
+.testimonials-header{text-align:center;margin-bottom:80px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.testimonial{background:var(--card);padding:44px 40px}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:var(--gold-dim);line-height:.6;margin-bottom:24px}
+.testimonial-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;font-weight:300;color:var(--text);line-height:1.8;margin-bottom:32px}
+.testimonial-author{display:flex;align-items:center;gap:16px}
+.author-avatar{width:44px;height:44px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);flex-shrink:0}
+.author-name{font-size:.88rem;font-weight:400;color:var(--white);margin-bottom:4px}
+.author-type{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--black);padding:80px 60px 40px;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand p{font-size:.82rem;color:var(--muted);line-height:1.9;max-width:280px;margin-top:16px}
+.footer-col h4{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .3s ease}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:.75rem;color:rgba(245,242,238,0.3)}
+.social-links{display:flex;gap:24px}
+.social-links a{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s ease}
+.social-links a:hover{color:var(--gold)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease;backdrop-filter:blur(8px);padding:20px}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid var(--border);max-width:520px;width:100%;padding:52px;position:relative;transform:translateY(30px);transition:transform .4s ease}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.modal-close{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:none;transition:color .3s ease;line-height:1}
+.modal-close:hover{color:var(--gold)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--white);margin-bottom:8px}
+.modal-sub{font-size:.82rem;color:var(--muted);margin-bottom:36px;line-height:1.7}
+.login-form{display:flex;flex-direction:column;gap:18px}
+.login-switch{text-align:center;font-size:.82rem;color:var(--muted);margin-top:8px}
+.login-switch a{color:var(--gold);text-decoration:none;cursor:none}
+.divider{display:flex;align-items:center;gap:16px;font-size:.72rem;color:rgba(245,242,238,0.2)}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* TOAST */
+#toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--gold);color:var(--white);padding:14px 32px;font-size:.82rem;letter-spacing:.05em;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,.5);transition:opacity .4s ease;pointer-events:none;opacity:0;white-space:nowrap}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:500;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all .3s ease;cursor:none}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,0.6)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:24px 32px}
+  section{padding:80px 32px}
+  .services-header{grid-template-columns:1fr;gap:32px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .process-grid{grid-template-columns:1fr;gap:40px}
+  .booking-inner{grid-template-columns:1fr;gap:48px}
+  .booking-info{position:static}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .testimonials-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .portfolio-masonry{columns:2}
+  .photo-row{height:40vh}
+}
+@media(max-width:768px){
+  nav{padding:20px 24px}
+  .nav-links{display:none}
+  section{padding:60px 24px}
+  .services-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .form-submit{grid-column:1}
+  .stats{padding:60px 24px}
+  .portfolio-masonry{columns:1}
+  .photo-row{grid-template-columns:1fr;height:auto}
+  .photo-row .pr-item{height:50vw}
+  .footer-top{grid-template-columns:1fr;gap:36px}
+  .footer-bottom{flex-direction:column;gap:16px;text-align:center}
+  .modal{padding:36px 28px}
+  .form-card{padding:36px 28px}
+  .portfolio-section{padding:80px 24px}
+  .featured-caption{padding:30px}
+}
 </style>
 </head>
 <body>
 
-<!-- SETUP GUIDE PANEL (sirf aapke liye - clients ko nahi dikhta) -->
-<div id="setupPanel" style="position:fixed;bottom:24px;right:24px;z-index:99999;background:#0f0f0f;border:1px solid #c9a84c;width:340px;border-radius:4px;font-family:'Outfit',sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.8);overflow:hidden;">
-  <div style="background:#c9a84c;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleSetup()">
-    <span style="color:#0a0a0a;font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;">🔧 Setup Guide — 3 Steps</span>
-    <span id="setupArrow" style="color:#0a0a0a;">▲</span>
-  </div>
-  <div id="setupBody" style="padding:20px 18px;font-size:.78rem;color:rgba(245,242,238,.75);line-height:1.8;">
-    <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07);">
-      <div style="color:#c9a84c;font-weight:500;margin-bottom:6px;">STEP 1 — EMAIL (Formspree)</div>
-      1. <a href="https://formspree.io" target="_blank" style="color:#c9a84c;">formspree.io</a> pe free account banao<br>
-      2. "New Form" → apna Gmail daalo<br>
-      3. Form ID copy karo (jaise: <code style="color:#e8c97a;">xpwzgkla</code>)<br>
-      4. Code mein <code style="color:#e8c97a;">YOUR_FORM_ID</code> replace karo<br>
-      <span style="color:rgba(201,168,76,.5);font-size:.7rem;">✓ Free 50 emails/month</span>
-    </div>
-    <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07);">
-      <div style="color:#c9a84c;font-weight:500;margin-bottom:6px;">STEP 2 — WHATSAPP</div>
-      Code mein <code style="color:#e8c97a;">917999663730</code> replace karo<br>
-      Format: <code style="color:#e8c97a;">91 + apka 10-digit number</code><br>
-      Example: <code style="color:#e8c97a;">919300012345</code><br>
-      <span style="color:rgba(201,168,76,.5);font-size:.7rem;">✓ Form submit hote hi WhatsApp khulega</span>
-    </div>
-    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07);">
-      <div style="color:#c9a84c;font-weight:500;margin-bottom:6px;">STEP 3 — GOOGLE SHEETS</div>
-      1. <a href="https://sheets.new" target="_blank" style="color:#c9a84c;">sheets.new</a> pe nayi sheet banao<br>
-      2. Extensions → Apps Script → paste karo:<br>
-      <div style="background:rgba(201,168,76,.08);padding:8px;margin:6px 0;font-size:.67rem;color:#e8c97a;border-left:2px solid #c9a84c;white-space:pre-wrap;">function doPost(e){
-  var s=SpreadsheetApp.getActiveSheet();
-  var d=JSON.parse(e.postData.contents);
-  s.appendRow([d.submitted_at,d.name,
-    d.phone,d.email,d.session,
-    d.date,d.budget,d.message]);
-  return ContentService.createTextOutput('ok');
-}</div>
-      3. Deploy → Web App → URL copy karo<br>
-      4. <code style="color:#e8c97a;">YOUR_SCRIPT_ID</code> replace karo<br>
-      <span style="color:rgba(201,168,76,.5);font-size:.7rem;">✓ Sab leads spreadsheet mein save</span>
-    </div>
-    <div style="text-align:center;color:rgba(245,242,238,.3);font-size:.7rem;">Setup hone ke baad is panel ko HTML se delete karna</div>
-  </div>
-</div>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/917999663730" target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <!-- NAV -->
 <nav>
@@ -1014,17 +263,15 @@
   <a href="#booking" class="nav-cta">Book Session</a>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — real photo as background -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="floating-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
+  <div class="hero-img">
+    <img src="images/img13-wedding-lights.png" alt="Candidphotographers — Wedding Photography Bhopal">
   </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Premium Photography Studio</p>
+    <p class="hero-eyebrow">Premium Photography Studio — Bhopal</p>
     <h1 class="hero-title">We Capture<br><em>Your Story</em></h1>
     <p class="hero-sub">From intimate portraits to grand weddings — every frame we create is a timeless work of art.</p>
     <div class="hero-actions">
@@ -1040,22 +287,10 @@
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat reveal">
-    <div class="stat-num">500+</div>
-    <div class="stat-label">Happy Clients</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">8+</div>
-    <div class="stat-label">Years Experience</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">12K+</div>
-    <div class="stat-label">Photos Delivered</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num">98%</div>
-    <div class="stat-label">Client Satisfaction</div>
-  </div>
+  <div class="stat reveal"><div class="stat-num">500+</div><div class="stat-label">Happy Clients</div></div>
+  <div class="stat reveal"><div class="stat-num">8+</div><div class="stat-label">Years Experience</div></div>
+  <div class="stat reveal"><div class="stat-num">12K+</div><div class="stat-label">Photos Delivered</div></div>
+  <div class="stat reveal"><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
 </div>
 
 <!-- SERVICES -->
@@ -1066,80 +301,93 @@
       <h2 class="section-title">Every Moment<br>Deserves to be<br><em>Remembered</em></h2>
     </div>
     <div>
-      <p class="section-desc">We specialize in a wide range of photography services — each one delivered with artistic precision and passionate attention to detail.</p>
+      <p class="section-desc">We specialize in a wide range of photography services — each delivered with artistic precision and passionate attention to detail.</p>
     </div>
   </div>
-
   <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-num">01</div>
-      <h3 class="service-name">Wedding Photography</h3>
-      <p class="service-desc">Your wedding day deserves nothing less than perfection. We document every emotion, every laugh, every tear with cinematic elegance.</p>
+    <div class="service-card reveal"><div class="service-num">01</div><h3 class="service-name">Wedding Photography</h3><p class="service-desc">Your wedding day deserves nothing less than perfection. We document every emotion, laugh, and tear with cinematic elegance.</p></div>
+    <div class="service-card reveal"><div class="service-num">02</div><h3 class="service-name">Portrait Sessions</h3><p class="service-desc">Individual, couple, or family portraits — we craft images that reveal the true essence and personality of every subject.</p></div>
+    <div class="service-card reveal"><div class="service-num">03</div><h3 class="service-name">Commercial & Brand</h3><p class="service-desc">Elevate your brand with high-impact commercial photography. Product shots, corporate profiles, and advertising campaigns.</p></div>
+    <div class="service-card reveal"><div class="service-num">04</div><h3 class="service-name">Fashion & Editorial</h3><p class="service-desc">Bold, editorial-grade fashion photography that makes your lookbooks, campaigns, and collections look stunning.</p></div>
+    <div class="service-card reveal"><div class="service-num">05</div><h3 class="service-name">Events & Corporate</h3><p class="service-desc">Conferences, launches, award nights — we capture the energy and professionalism of every corporate event.</p></div>
+    <div class="service-card reveal"><div class="service-num">06</div><h3 class="service-name">Maternity & Newborn</h3><p class="service-desc">The most precious chapter of life. Soft, intimate, and beautifully lit sessions you'll treasure forever.</p></div>
+  </div>
+</section>
+
+<!-- FEATURED PHOTO 1 — full bleed -->
+<div class="featured-photo reveal">
+  <img src="images/img01-couple-arch.png" alt="Wedding couple at heritage location">
+  <div class="featured-caption">
+    <h2>A Love Story, Framed Forever</h2>
+    <p>Wedding Photography · Bhopal</p>
+  </div>
+</div>
+
+<!-- PORTFOLIO GALLERY -->
+<section class="portfolio-section" id="portfolio">
+  <div class="portfolio-header reveal">
+    <p class="section-label">Our Work</p>
+    <h2 class="section-title">Moments We've<br><em>Immortalized</em></h2>
+  </div>
+
+  <div class="portfolio-masonry reveal">
+    <div class="p-item">
+      <img src="images/img11-bride-closeup.png" alt="Bridal portrait">
+      <div class="p-overlay"><span class="p-overlay-text">Bridal Portrait</span></div>
     </div>
-    <div class="service-card reveal">
-      <div class="service-num">02</div>
-      <h3 class="service-name">Portrait Sessions</h3>
-      <p class="service-desc">Individual, couple, or family portraits — we craft images that reveal the true essence and personality of every subject.</p>
+    <div class="p-item">
+      <img src="images/img10-wedding-ceremony.png" alt="Wedding ceremony">
+      <div class="p-overlay"><span class="p-overlay-text">Wedding Ceremony</span></div>
     </div>
-    <div class="service-card reveal">
-      <div class="service-num">03</div>
-      <h3 class="service-name">Commercial & Brand</h3>
-      <p class="service-desc">Elevate your brand with high-impact commercial photography. Product shots, corporate profiles, and advertising campaigns.</p>
+    <div class="p-item">
+      <img src="images/img07-portrait-couple.png" alt="Couple portrait session">
+      <div class="p-overlay"><span class="p-overlay-text">Portrait Session</span></div>
     </div>
-    <div class="service-card reveal">
-      <div class="service-num">04</div>
-      <h3 class="service-name">Fashion & Editorial</h3>
-      <p class="service-desc">Bold, editorial-grade fashion photography that makes your lookbooks, campaigns, and collections look stunning.</p>
+    <div class="p-item">
+      <img src="images/img04-bride-lehenga.png" alt="Bride in lehenga">
+      <div class="p-overlay"><span class="p-overlay-text">Bridal Story</span></div>
     </div>
-    <div class="service-card reveal">
-      <div class="service-num">05</div>
-      <h3 class="service-name">Events & Corporate</h3>
-      <p class="service-desc">Conferences, launches, award nights — we capture the energy and professionalism of every corporate event.</p>
+    <div class="p-item">
+      <img src="images/img09-bride-veil.png" alt="Bride with veil">
+      <div class="p-overlay"><span class="p-overlay-text">The Veil Moment</span></div>
     </div>
-    <div class="service-card reveal">
-      <div class="service-num">06</div>
-      <h3 class="service-name">Maternity & Newborn</h3>
-      <p class="service-desc">The most precious chapter of life. Soft, intimate, and beautifully lit sessions that you'll treasure forever.</p>
+    <div class="p-item">
+      <img src="images/img02-wedding-couple.png" alt="Traditional wedding couple">
+      <div class="p-overlay"><span class="p-overlay-text">Traditional Wedding</span></div>
+    </div>
+    <div class="p-item">
+      <img src="images/img06-bride-jewellery.png" alt="Bride jewellery closeup">
+      <div class="p-overlay"><span class="p-overlay-text">Detail & Elegance</span></div>
+    </div>
+    <div class="p-item">
+      <img src="images/img08-studio-couple.png" alt="Studio couple shoot">
+      <div class="p-overlay"><span class="p-overlay-text">Studio Session</span></div>
+    </div>
+    <div class="p-item">
+      <img src="images/img12-bride-dark.png" alt="Bride dramatic portrait">
+      <div class="p-overlay"><span class="p-overlay-text">Dramatic Portrait</span></div>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO STRIP -->
-<div class="portfolio-strip" id="portfolio">
-  <div class="portfolio-item p1">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-label">
-      <h3>The Sharma Wedding</h3>
-      <p>Wedding</p>
-    </div>
+<!-- TWO PHOTO ROW -->
+<div class="photo-row reveal">
+  <div class="pr-item">
+    <img src="images/img03-bride-groom-dark.png" alt="Bride and groom">
+    <span class="pr-label">Wedding · Studio</span>
   </div>
-  <div class="portfolio-item p2">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-label">
-      <h3>Rohan & Priya</h3>
-      <p>Portrait</p>
-    </div>
+  <div class="pr-item">
+    <img src="images/img05-bride-smile.png" alt="Smiling bride">
+    <span class="pr-label">Portrait · Bridal</span>
   </div>
-  <div class="portfolio-item p3">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-label">
-      <h3>Lumina SS'25</h3>
-      <p>Fashion</p>
-    </div>
-  </div>
-  <div class="portfolio-item p4">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-label">
-      <h3>TechCorp Launch</h3>
-      <p>Corporate</p>
-    </div>
-  </div>
-  <div class="portfolio-item p5">
-    <div class="portfolio-bg"></div>
-    <div class="portfolio-label">
-      <h3>Baby Arjun</h3>
-      <p>Newborn</p>
-    </div>
+</div>
+
+<!-- FEATURED PHOTO 2 -->
+<div class="featured-photo reveal">
+  <img src="images/img13-wedding-lights.png" alt="Wedding with bokeh lights" style="object-position:center">
+  <div class="featured-caption">
+    <h2>Every Light Tells a Story</h2>
+    <p>Wedding Photography · Candid Moments</p>
   </div>
 </div>
 
@@ -1149,48 +397,24 @@
     <div class="reveal">
       <p class="section-label">How it Works</p>
       <h2 class="section-title">Simple.<br><em>Seamless.</em><br>Stunning.</h2>
-      <p class="section-desc" style="margin-top:20px;">From your first inquiry to your final gallery — we make the entire experience effortless.</p>
+      <p class="section-desc" style="margin-top:20px">From your first inquiry to your final gallery — we make the entire experience effortless.</p>
     </div>
     <div class="process-steps reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div>
-          <h3 class="step-title">Book Your Session</h3>
-          <p class="step-desc">Fill out our simple booking form. Tell us your vision, date, and requirements. We'll confirm within 24 hours.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div>
-          <h3 class="step-title">Pre-Session Consultation</h3>
-          <p class="step-desc">We connect with you to discuss mood boards, location, styling, and every detail to make your session perfect.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div>
-          <h3 class="step-title">The Photoshoot</h3>
-          <p class="step-desc">Your session day arrives. We take care of everything — directing, lighting, and ensuring you feel comfortable and confident.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div>
-          <h3 class="step-title">Editing & Delivery</h3>
-          <p class="step-desc">Professional post-processing and color grading. Your final gallery is delivered via a beautiful private online portal.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">01</div><div><h3 class="step-title">Book Your Session</h3><p class="step-desc">Fill out our simple booking form. Tell us your vision, date, and requirements. We confirm within 24 hours.</p></div></div>
+      <div class="step"><div class="step-num">02</div><div><h3 class="step-title">Pre-Session Consultation</h3><p class="step-desc">We connect to discuss mood boards, location, styling, and every detail to make your session perfect.</p></div></div>
+      <div class="step"><div class="step-num">03</div><div><h3 class="step-title">The Photoshoot</h3><p class="step-desc">Your session day arrives. We handle everything — directing, lighting, and ensuring you feel comfortable and confident.</p></div></div>
+      <div class="step"><div class="step-num">04</div><div><h3 class="step-title">Editing & Delivery</h3><p class="step-desc">Professional post-processing and color grading. Your final gallery delivered via a beautiful private online portal.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- BOOKING / CONTACT FORM -->
+<!-- BOOKING FORM -->
 <section class="booking" id="booking">
   <div class="booking-inner">
     <div class="booking-info reveal">
       <p class="section-label">Book a Session</p>
       <h2 class="section-title">Let's Create<br>Something<br><em>Beautiful</em></h2>
-      <p class="section-desc" style="margin-top:20px;">Fill in your details and we'll reach out to confirm your booking and discuss your vision.</p>
+      <p class="section-desc" style="margin-top:20px">Fill in your details and we'll reach out to confirm your booking and discuss your vision.</p>
       <div class="booking-features">
         <div class="feature"><div class="feature-dot"></div>Response within 24 hours</div>
         <div class="feature"><div class="feature-dot"></div>Free pre-session consultation</div>
@@ -1199,32 +423,18 @@
         <div class="feature"><div class="feature-dot"></div>Professional post-processing included</div>
       </div>
     </div>
-
     <div class="form-card reveal">
       <div id="formContent">
         <h3 class="form-title">Booking Inquiry</h3>
         <p class="form-sub">Tell us about your session and we'll get back to you shortly.</p>
-
-        <div class="form-grid" id="bookingForm">
-          <div class="form-group">
-            <label class="form-label">First Name *</label>
-            <input type="text" class="form-input" placeholder="Rahul" id="firstName">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Last Name *</label>
-            <input type="text" class="form-input" placeholder="Sharma" id="lastName">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input type="email" class="form-input" placeholder="rahul@example.com" id="email">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" class="form-input" placeholder="+91 79996 63730" id="phone">
-          </div>
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">First Name *</label><input type="text" class="form-input" placeholder="Rahul" id="firstName"></div>
+          <div class="form-group"><label class="form-label">Last Name *</label><input type="text" class="form-input" placeholder="Sharma" id="lastName"></div>
+          <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="rahul@example.com" id="email"></div>
+          <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" class="form-input" placeholder="+91 98765 43210" id="phone"></div>
           <div class="form-group">
             <label class="form-label">Session Type *</label>
-            <select class="form-select form-input" id="sessionType">
+            <select class="form-select" id="sessionType">
               <option value="" disabled selected>Select a service</option>
               <option>Wedding Photography</option>
               <option>Portrait Session</option>
@@ -1235,17 +445,11 @@
               <option>Other</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Preferred Date</label>
-            <input type="date" class="form-input" id="prefDate">
-          </div>
-          <div class="form-group full">
-            <label class="form-label">Location / Venue</label>
-            <input type="text" class="form-input" placeholder="e.g. Bhopal, at home, outdoor, studio" id="location">
-          </div>
+          <div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input" id="prefDate"></div>
+          <div class="form-group full"><label class="form-label">Location / Venue</label><input type="text" class="form-input" placeholder="e.g. Bhopal, at home, outdoor, studio" id="location"></div>
           <div class="form-group full">
             <label class="form-label">Budget Range</label>
-            <select class="form-select form-input" id="budget">
+            <select class="form-select" id="budget">
               <option value="" disabled selected>Select your budget</option>
               <option>Under ₹10,000</option>
               <option>₹10,000 – ₹25,000</option>
@@ -1254,20 +458,16 @@
               <option>Above ₹1,00,000</option>
             </select>
           </div>
-          <div class="form-group full">
-            <label class="form-label">Tell Us Your Vision</label>
-            <textarea class="form-textarea form-input" placeholder="Describe the mood, style, or any specific ideas you have in mind..." id="message"></textarea>
-          </div>
+          <div class="form-group full"><label class="form-label">Tell Us Your Vision</label><textarea class="form-textarea form-input" placeholder="Describe the mood, style, or any specific ideas you have in mind..." id="message"></textarea></div>
           <button class="form-submit" onclick="submitForm()">Send Inquiry →</button>
         </div>
       </div>
-
       <div class="success-msg" id="successMsg">
         <div class="success-icon">✦</div>
         <h3>Inquiry Received!</h3>
         <p>Thank you for reaching out. We've received your details and will contact you within 24 hours to confirm your booking.</p>
         <br>
-        <p style="color: var(--gold); font-size: 0.82rem; letter-spacing: 0.05em;" id="confirmDetails"></p>
+        <p style="color:var(--gold);font-size:.82rem;letter-spacing:.05em" id="confirmDetails"></p>
       </div>
     </div>
   </div>
@@ -1279,40 +479,21 @@
     <p class="section-label">Client Stories</p>
     <h2 class="section-title">What Our Clients <em>Say</em></h2>
   </div>
-
   <div class="testimonials-grid">
     <div class="testimonial reveal">
       <div class="quote-mark">"</div>
       <p class="testimonial-text">The wedding photos exceeded every expectation. They captured moments we didn't even know were happening — pure magic in every frame.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">P</div>
-        <div>
-          <div class="author-name">Priya & Arjun Mehta</div>
-          <div class="author-type">Wedding · Bhopal</div>
-        </div>
-      </div>
+      <div class="testimonial-author"><div class="author-avatar">P</div><div><div class="author-name">Priya & Arjun Mehta</div><div class="author-type">Wedding · Bhopal</div></div></div>
     </div>
     <div class="testimonial reveal">
       <div class="quote-mark">"</div>
       <p class="testimonial-text">Our product campaign came out absolutely stunning. The photographer understood our brand vision perfectly and delivered beyond imagination.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">S</div>
-        <div>
-          <div class="author-name">Shreya Kapoor</div>
-          <div class="author-type">Commercial · Fashion Brand</div>
-        </div>
-      </div>
+      <div class="testimonial-author"><div class="author-avatar">S</div><div><div class="author-name">Shreya Kapoor</div><div class="author-type">Commercial · Fashion Brand</div></div></div>
     </div>
     <div class="testimonial reveal">
       <div class="quote-mark">"</div>
-      <p class="testimonial-text">The newborn photos of our baby are the most treasured things we own. The care, creativity, and attention to safety was unmatched.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">R</div>
-        <div>
-          <div class="author-name">Rekha & Vikram Joshi</div>
-          <div class="author-type">Newborn · Family Session</div>
-        </div>
-      </div>
+      <p class="testimonial-text">The bridal photos are the most treasured things we own. The care, creativity, and attention to every detail was absolutely unmatched.</p>
+      <div class="testimonial-author"><div class="author-avatar">R</div><div><div class="author-name">Rekha & Vikram Joshi</div><div class="author-type">Wedding · Bhopal</div></div></div>
     </div>
   </div>
 </section>
@@ -1321,25 +502,25 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <span class="logo">Candidphotographers<span>.</span></span>
-      <p>A premium photography studio dedicated to creating timeless images that tell your story with authenticity and artistry.</p>
+      <div class="logo">Candidphotographers<span>.</span></div>
+      <p>A premium photography studio in Bhopal dedicated to creating timeless images that tell your story with authenticity and artistry.</p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <ul class="footer-links">
-        <li><a href="#">Wedding Photography</a></li>
-        <li><a href="#">Portraits</a></li>
-        <li><a href="#">Commercial</a></li>
-        <li><a href="#">Fashion</a></li>
-        <li><a href="#">Events</a></li>
+        <li><a href="#services">Wedding Photography</a></li>
+        <li><a href="#services">Portraits</a></li>
+        <li><a href="#services">Commercial</a></li>
+        <li><a href="#services">Fashion</a></li>
+        <li><a href="#services">Events</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Studio</h4>
       <ul class="footer-links">
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li><a href="#">Pricing</a></li>
+        <li><a href="#home">About Us</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#booking">Contact</a></li>
       </ul>
@@ -1348,7 +529,7 @@
       <h4>Contact</h4>
       <ul class="footer-links">
         <li><a href="mailto:candidartsphotography@gmail.com">candidartsphotography@gmail.com</a></li>
-        <li><a href="#">+91 79996 63730</a></li>
+        <li><a href="tel:+917999663730">+91 79996 63730</a></li>
         <li><a href="#">Bhopal, MP</a></li>
         <li><a href="#">Mon–Sat, 10am–7pm</a></li>
       </ul>
@@ -1359,7 +540,7 @@
     <div class="social-links">
       <a href="#">Instagram</a>
       <a href="#">Facebook</a>
-      <a href="#">WhatsApp</a>
+      <a href="https://wa.me/917999663730" target="_blank">WhatsApp</a>
     </div>
   </div>
 </footer>
@@ -1372,266 +553,116 @@
       <h2 class="modal-title">Welcome Back</h2>
       <p class="modal-sub">Sign in to view your gallery, track bookings, and more.</p>
       <div class="login-form">
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" placeholder="••••••••">
-        </div>
-        <button class="form-submit" style="margin-top:4px;" onclick="loginSuccess()">Sign In →</button>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="••••••••"></div>
+        <button class="form-submit" style="margin-top:4px" onclick="loginSuccess()">Sign In →</button>
         <div class="divider">or</div>
         <p class="login-switch">New client? <a href="#" onclick="showRegister()">Create an account</a></p>
       </div>
     </div>
-    <div id="registerView" style="display:none;">
+    <div id="registerView" style="display:none">
       <h2 class="modal-title">Join Us</h2>
       <p class="modal-sub">Create your client account to manage bookings and access your gallery.</p>
       <div class="login-form">
-        <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input type="text" class="form-input" placeholder="Rahul Sharma">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-input" placeholder="+91 79996 63730">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" placeholder="Create a password">
-        </div>
-        <button class="form-submit" style="margin-top:4px;" onclick="registerSuccess()">Create Account →</button>
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Rahul Sharma"></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" placeholder="+91 79996 63730"></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="Create a password"></div>
+        <button class="form-submit" style="margin-top:4px" onclick="registerSuccess()">Create Account →</button>
         <p class="login-switch">Already a client? <a href="#" onclick="showLogin()">Sign in here</a></p>
       </div>
     </div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  function toggleSetup() {
-    const b = document.getElementById('setupBody');
-    const a = document.getElementById('setupArrow');
-    if (b.style.display === 'none') { b.style.display='block'; a.textContent='▲'; }
-    else { b.style.display='none'; a.textContent='▼'; }
-  }
+<div id="toast"></div>
 
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
+<script>
+// CONFIG
+const STUDIO_CONFIG = {
+  formspree_url:    "https://formspree.io/f/YOUR_FORM_ID",
+  whatsapp_number:  "917999663730",
+  google_sheet_url: "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+};
 
-  document.querySelectorAll('a, button, .service-card, .portfolio-item, .step').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width = '56px'; ring.style.height = '56px';
-      ring.style.borderColor = 'rgba(201,168,76,0.8)';
-      cursor.style.transform = 'translate(-50%,-50%) scale(1.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width = '36px'; ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(201,168,76,0.5)';
-      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-    });
-  });
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button,.service-card,.p-item,.pr-item,.step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(201,168,76,0.8)';cursor.style.transform='translate(-50%,-50%) scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(201,168,76,0.5)';cursor.style.transform='translate(-50%,-50%) scale(1)'});
+});
 
-  // SCROLL REVEAL
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// SCROLL REVEAL
+const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting)setTimeout(()=>en.target.classList.add('visible'),i*80)})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-  // ================================================================
-  // 🔧 STUDIO OWNER — APNI DETAILS YAHAN BHARO (3 jagah sirf)
-  // ================================================================
-  const STUDIO_CONFIG = {
-    // 1️⃣ FORMSPREE: formspree.io pe free account banao → apna form endpoint paste karo
-    formspree_url: "https://formspree.io/f/YOUR_FORM_ID",
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  if(window.scrollY>60){nav.style.background='rgba(10,10,10,0.98)';nav.style.backdropFilter='blur(12px)';nav.style.padding='18px 60px'}
+  else{nav.style.background='linear-gradient(to bottom,rgba(10,10,10,0.95),transparent)';nav.style.backdropFilter='blur(2px)';nav.style.padding='28px 60px'}
+});
 
-    // 2️⃣ WHATSAPP: Apna WhatsApp number (country code ke saath, bina + ke)
-    whatsapp_number: "917999663730",
+// DATE
+const di=document.getElementById('prefDate');
+if(di)di.min=new Date().toISOString().split('T')[0];
 
-    // 3️⃣ GOOGLE SHEETS: Sheet URL (niche guide mein instructions hain)
-    google_sheet_url: "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
+// TOAST
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',3500)}
+
+// FORM SUBMIT
+async function submitForm(){
+  const first=document.getElementById('firstName').value.trim();
+  const last=document.getElementById('lastName').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const session=document.getElementById('sessionType').value;
+  if(!first||!last||!email||!phone||!session){showToast('⚠️ Please fill all required fields (*)');return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('⚠️ Please enter a valid email address');return}
+  const btn=document.querySelector('#formContent .form-submit');
+  btn.textContent='Sending...';btn.style.opacity='.7';btn.disabled=true;
+  const data={
+    name:first+' '+last,email,phone,session,
+    date:document.getElementById('prefDate').value||'Flexible',
+    location:document.getElementById('location').value||'TBD',
+    budget:document.getElementById('budget').value||'Not specified',
+    message:document.getElementById('message').value||'No notes',
+    submitted_at:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
   };
-  // ================================================================
-
-  async function submitForm() {
-    const first = document.getElementById('firstName').value.trim();
-    const last  = document.getElementById('lastName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const session = document.getElementById('sessionType').value;
-
-    if (!first || !last || !email || !phone || !session) {
-      showToast('⚠️ Please fill all required fields (*)'); return;
+  // 1. FORMSPREE
+  try{
+    if(!STUDIO_CONFIG.formspree_url.includes('YOUR_FORM_ID')){
+      const r=await fetch(STUDIO_CONFIG.formspree_url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'📸 New Booking: '+data.session+' — '+data.name+' | Candidphotographers',...data})});
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showToast('⚠️ Please enter a valid email address'); return;
+  }catch(e){}
+  // 2. GOOGLE SHEETS
+  try{
+    if(!STUDIO_CONFIG.google_sheet_url.includes('YOUR_SCRIPT_ID')){
+      await fetch(STUDIO_CONFIG.google_sheet_url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     }
+  }catch(e){}
+  // 3. WHATSAPP
+  const w=encodeURIComponent('🎉 *NEW BOOKING — Candidphotographers*\n\n👤 *Name:* '+data.name+'\n📱 *Phone:* '+data.phone+'\n📧 *Email:* '+data.email+'\n📸 *Session:* '+data.session+'\n📅 *Date:* '+data.date+'\n📍 *Location:* '+data.location+'\n💰 *Budget:* '+data.budget+'\n💬 *Message:* '+data.message+'\n🕐 *Time:* '+data.submitted_at);
+  setTimeout(()=>window.open('https://wa.me/'+STUDIO_CONFIG.whatsapp_number+'?text='+w,'_blank'),600);
+  document.getElementById('formContent').style.display='none';
+  document.getElementById('successMsg').classList.add('show');
+  document.getElementById('confirmDetails').textContent=data.name+' · '+data.session+' · '+data.phone;
+  showToast('✅ Inquiry sent! WhatsApp notification opened.');
+  btn.disabled=false;
+}
 
-    const btn = document.querySelector('.form-submit');
-    btn.textContent = 'Sending...';
-    btn.style.opacity = '0.7';
-    btn.disabled = true;
-
-    const data = {
-      name:    `${first} ${last}`,
-      email,   phone,   session,
-      date:    document.getElementById('prefDate').value    || 'Flexible',
-      location:document.getElementById('location').value   || 'TBD',
-      budget:  document.getElementById('budget').value     || 'Not specified',
-      message: document.getElementById('message').value    || 'No notes',
-      submitted_at: new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'})
-    };
-
-    let emailSent = false, sheetSaved = false;
-
-    // ── 1. FORMSPREE EMAIL ──────────────────────────────────────
-    try {
-      if (!STUDIO_CONFIG.formspree_url.includes('YOUR_FORM_ID')) {
-        const res = await fetch(STUDIO_CONFIG.formspree_url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: `📸 New Booking: ${data.session} — ${data.name} | Candidphotographers`,
-            ...data
-          })
-        });
-        if (res.ok) emailSent = true;
-      }
-    } catch(e) { console.warn('Formspree error:', e); }
-
-    // ── 2. GOOGLE SHEETS ────────────────────────────────────────
-    try {
-      if (!STUDIO_CONFIG.google_sheet_url.includes('YOUR_SCRIPT_ID')) {
-        await fetch(STUDIO_CONFIG.google_sheet_url + '?callback=cb', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        sheetSaved = true;
-      }
-    } catch(e) { console.warn('Sheets error:', e); }
-
-    // ── 3. WHATSAPP MESSAGE ─────────────────────────────────────
-    const waMsg = encodeURIComponent(
-      `🎉 *NEW BOOKING INQUIRY — Candidphotographers*\n\n` +
-      `👤 *Name:* ${data.name}\n` +
-      `📱 *Phone:* ${data.phone}\n` +
-      `📧 *Email:* ${data.email}\n` +
-      `📸 *Session:* ${data.session}\n` +
-      `📅 *Date:* ${data.date}\n` +
-      `📍 *Location:* ${data.location}\n` +
-      `💰 *Budget:* ${data.budget}\n` +
-      `💬 *Message:* ${data.message}\n` +
-      `🕐 *Time:* ${data.submitted_at}`
-    );
-    const waURL = `https://wa.me/${STUDIO_CONFIG.whatsapp_number}?text=${waMsg}`;
-
-    // Show success
-    document.getElementById('bookingForm').style.display = 'none';
-    document.querySelector('.form-title').style.display = 'none';
-    document.querySelector('.form-sub').style.display   = 'none';
-    document.getElementById('successMsg').classList.add('show');
-    document.getElementById('confirmDetails').textContent =
-      `${data.name} · ${data.session} · ${data.email} · ${data.phone}`;
-
-    // Open WhatsApp in new tab (always — instant notification)
-    if (!STUDIO_CONFIG.whatsapp_number.includes('0000000000')) {
-      setTimeout(() => window.open(waURL, '_blank'), 800);
-    }
-
-    showToast(emailSent ? '✅ Email sent + WhatsApp opened!' : '✅ Inquiry received! WhatsApp notification sent.');
-    btn.disabled = false;
-  }
-
-  // Toast notification
-  function showToast(msg) {
-    let t = document.getElementById('toast');
-    if (!t) {
-      t = document.createElement('div');
-      t.id = 'toast';
-      t.style.cssText = `position:fixed;bottom:36px;left:50%;transform:translateX(-50%);
-        background:var(--card);border:1px solid var(--gold);color:var(--white);
-        padding:14px 32px;font-size:.82rem;letter-spacing:.05em;z-index:9999;
-        border-radius:2px;box-shadow:0 8px 32px rgba(0,0,0,.5);
-        transition:opacity .4s ease;pointer-events:none;`;
-      document.body.appendChild(t);
-    }
-    t.textContent = msg; t.style.opacity = '1';
-    setTimeout(() => t.style.opacity = '0', 3500);
-  }
-
-  // MODAL
-  function openModal() {
-    document.getElementById('loginModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('loginModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function showRegister() {
-    document.getElementById('loginView').style.display = 'none';
-    document.getElementById('registerView').style.display = 'block';
-  }
-  function showLogin() {
-    document.getElementById('registerView').style.display = 'none';
-    document.getElementById('loginView').style.display = 'block';
-  }
-  function loginSuccess() {
-    closeModal();
-    alert('Welcome back! Redirecting to your client portal...');
-  }
-  function registerSuccess() {
-    closeModal();
-    alert('Account created! We\'ll contact you soon.');
-  }
-
-  document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  // Add login trigger to nav CTA on mobile / or as separate button
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // Smooth date input styling
-  const dateInput = document.getElementById('prefDate');
-  if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-  }
-
-  // NAV scroll effect
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 60) {
-      nav.style.background = 'rgba(10,10,10,0.98)';
-      nav.style.backdropFilter = 'blur(12px)';
-      nav.style.padding = '18px 60px';
-    } else {
-      nav.style.backgroun
+// MODAL
+function openModal(){document.getElementById('loginModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('loginModal').classList.remove('open');document.body.style.overflow=''}
+function showRegister(){document.getElementById('loginView').style.display='none';document.getElementById('registerView').style.display='block'}
+function showLogin(){document.getElementById('registerView').style.display='none';document.getElementById('loginView').style.display='block'}
+function loginSuccess(){closeModal();showToast('✅ Welcome back!')}
+function registerSuccess(){closeModal();showToast('✅ Account created!')}
+document.getElementById('loginModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
